@@ -1,0 +1,412 @@
+﻿@model MVCminiProject.Models.User
+
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    ViewBag.Title = "Grid";
+}
+@{
+    ViewBag.Title = "Detail";
+}
+@{
+    ViewBag.Title = "Datatable";
+}
+
+
+
+
+
+<h2 style="color:orangered"><b>Registration</b></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>User</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CountryId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StateId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.CityId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CityId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Country", null, "---select Country-----")
+            @*<select id="Country">-----select state---</select>*@
+            @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StateName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownList("StateName", null, "---select State-----")*@
+            <select id="state">-----select state---</select>
+
+            @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CityId, "CityName", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })*@
+            <select id="CityId" name="CityId">-----select city---</select>
+            @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProfilePic, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProfilePic, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProfilePic, "", new { @class = "text-danger" })
+            format:@<text><img src="E:\MVC\MVCminiProject\Images"" @Url.Content(item.ProfilePic)" alt="@item.Name" height="100" width="100"></text>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" style="background-color:aqua" border="black" value="Register" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#Country").change(function () {
+                var id = $(this).val();
+                // alert(id)
+                $("#state").empty();
+                $.get("/Admin/State_Bind", { Country_Id: id }, function (data) {
+                    @* alert("welcome in get")*@
+                    var v = "<option>---Select---</option>";
+                    $.each(data, function (i, v1) {
+                        v += "<option value=" + v1.Value + ">" + v1.Text + "</option>";
+                    }); 
+                    $("#state").html(v);
+                });
+            });
+
+            $("#state").change(function () {
+                var id = $(this).val();
+                // alert(id)
+                $("#CityId").empty();
+                $.get("/Admin/City_Bind", { State_Id: id }, function (data) {
+                    @* alert("welcome in get")*@
+                    var v = "<option>---Select---</option>";
+                    $.each(data, function (i, v1) {
+                        v += "<option value=" + v1.Value + ">" + v1.Text + "</option>";
+                    });
+                    $("#CityId").html(v);
+                });
+            });
+            var City = $(this).val();
+            $(function () {
+                $("#City").autocomplete({
+                    source: function (request, response) {
+                        var autoSearch = { searchText: $("#City").val() };
+                        $.ajax({
+                            type: "POST",
+                            traditional: true,
+                            url: "~/Admin/Grid",
+                            data: autoSearch,
+                            dataType: "json",
+                            success: function (data) {
+                                response(data.d);
+                            },
+                            error: function (result) {
+                                alert("Error");
+                            }
+                        });
+                    },
+                    delay: 0,
+                    minLength: 2
+                });
+            });
+
+        });
+    </script>
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+
+
+
+    <div class="container">
+        <div>
+            <h3 class="text-center">Datatable</h3>
+        </div>
+        <table id="Grid" class="table table-bordered table-striped mt-4">
+            <thead>
+                <tr class="bg-primary text-light">
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Phone</td>
+                    <td>Email</td>
+                    <td>CountryName</td>
+                    <td>StateName</td>
+                    <td>CityName</td>
+                    <td>Password</td>
+                </tr>
+            </thead>
+            <tbody class="Detail">
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+
+        var dataSource = $("#Grid").data("Grid").dataSource;
+        var filteredData = dataSource.view();
+        filteredData.ajax;
+
+        $(document).ready(function () { //execute ajax after html elements have been rendered
+            url = "~/Admin/Grid" //url with the controller's name and the jsonRequest function
+            $.get(urlRequest, function (data) { // do ajax getrequest
+                var rows = '';
+                $.each(data, function (index, item) { //build tbody content using each function
+                    rows += "<tr>";
+                    rows += "<td>" + item.id + "</td>";
+                    rows += "<td>" + item.Name + "</td>";
+                    rows += "<td>" + item.Phone + "</td>";
+                    rows += "<td>" + item.Email + "</td>";
+                    rows += "<td>" + item.CountryName + "</td>";
+                    rows += "<td>" + item.StateName + "</td>";
+                    rows += "<td>" + item.CityName + "</td>";
+                    rows += "</tr>";
+                });
+                $('.Grid').html(rows); //append all content inside table's tbody (using class selector)
+            }).done(function () { //done is being executed at the very end of the ajax process
+                $('#Grid').DataTable(); //We need to call datatable function after the process to build the table's body has finished.
+            })
+        })
+    </script>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CountryId)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.StateId)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CityId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.CountryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StateName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model.ListUser)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CountryId)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.StateId)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CityId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @* @Html.ActionLink("Details", "Detail", new { id = item.Id }) |*@
+                    <a class="Detail" href="javascript:;" data-id=" @item.Id">Detail</a>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id },
+                    new { onclick = "return confirm('Are you sure want to Delete the Data');" })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+
+    <div id="partialModal" class="modal" tabindex="-1" role="dialog" style="position:center">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" style="color:greenyellow; font-size:xx-large">User Details</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".Detail").click(function () {
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id')
+                /* var id = $(this).closest("tr").find("td").eq(0).html();*/
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/Detail",
+                    data: '{id: "' + id + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "html",
+                    success: function (response) {
+                        $("#partialModal").find(".modal-body").html(response);
+                        $("#partialModal").modal('show');
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
+    @*<script type="text/javascript" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>*@
+
+
+
+
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
